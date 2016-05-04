@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using Xceed.Wpf.Toolkit;
 
 namespace Project
@@ -39,7 +40,7 @@ namespace Project
         {
             f.SaveAsToFile(text.Text);
             string file_name = f.ShortFileName;
-            if (file_name!=null)
+            if (file_name != null)
                 MainFile.Header = file_name;
         }
         private void Save_Click(object sender, RoutedEventArgs e)
@@ -98,7 +99,7 @@ namespace Project
         #endregion
 
         #region Робота з списком завдань
-        int number=0;
+        int number = 0;
         List<Zadania> all_zadania = new List<Zadania>();
         private void AddTask_Click(object sender, RoutedEventArgs e)
         {
@@ -216,15 +217,30 @@ namespace Project
 
             CheckBox ch = new CheckBox();
             ch.Name = "chek" + count;
+            ch.DataContext = all_zadania[count];
+            sp.Children.Add(ch);
+
+            if (all_zadania[count].Remind)
+            {
+                ch.Content = "Tak";
+                ch.IsChecked = true;
+
+                DateTimePicker dtpick = new DateTimePicker();
+                dtpick.Name = "time" + count;
+                dtpick.Format = DateTimeFormat.LongTime;
+                dtpick.ShowDropDownButton = false;
+                dtpick.Text = all_zadania[count].Time;
+                dtpick.FontSize = 20;
+                dtpick.LostFocus += new RoutedEventHandler(TimePicker_LostFocus);
+                sp.Children.Add(dtpick);
+            }
+            else
+            {
+                ch.Content = "Nie";
+                ch.IsChecked = false;
+            }
             ch.Checked += new RoutedEventHandler(CheckedChanged);
             ch.Unchecked += new RoutedEventHandler(UnCheckedChanged);
-            if (all_zadania[count].Remind)
-                ch.Content = "Tak";
-            else ch.Content = "Nie";
-            ch.DataContext = all_zadania[count];
-            binding = new Binding("Remind");
-            ch.SetBinding(CheckBox.IsCheckedProperty, binding);
-            sp.Children.Add(ch);
 
             Grid.SetColumn(sp, 3);
             gr.Children.Add(sp);
@@ -247,17 +263,17 @@ namespace Project
             int numer_zadania = Convert.ToInt32((sender as Button).Name.Remove(0, 6));
             all_zadania[numer_zadania].ChangeStatus();
             numer_zadania = all_zadania[numer_zadania].CurrentStatus;
-            if(numer_zadania == 0)
+            if (numer_zadania == 0)
             {
                 (sender as Button).Foreground = Brushes.Blue;
                 (sender as Button).Content = " ... ";
             }
-            else if(numer_zadania == 1)
+            else if (numer_zadania == 1)
             {
                 (sender as Button).Foreground = Brushes.Green;
                 (sender as Button).Content = " V ";
             }
-            else if(numer_zadania == 2)
+            else if (numer_zadania == 2)
             {
                 (sender as Button).Foreground = Brushes.Red;
                 (sender as Button).Content = " X ";
@@ -267,11 +283,18 @@ namespace Project
 
         private void CheckedChanged(object sender, RoutedEventArgs e)
         {
-            (sender as CheckBox).Content = "Tak";
+            int numer_zadania = Convert.ToInt32((sender as CheckBox).Name.Remove(0, 4));
+            all_zadania[numer_zadania].Remind = true;
+            SaveToFile();
+            Redraw();
         }
         private void UnCheckedChanged(object sender, RoutedEventArgs e)
         {
-            (sender as CheckBox).Content = "Nie";
+            int numer_zadania = Convert.ToInt32((sender as CheckBox).Name.Remove(0, 4));
+            all_zadania[numer_zadania].Remind = false;
+            all_zadania[numer_zadania].Time = null;
+            SaveToFile();
+            Redraw();
         }
         private void Text_LostFocus(object sender, RoutedEventArgs e)
         {
@@ -292,6 +315,7 @@ namespace Project
                     write_text.WriteLine(all_zadania[j].TextZadania);
                     write_text.WriteLine(all_zadania[j].Date);
                     write_text.WriteLine(all_zadania[j].Remind);
+                    write_text.WriteLine(all_zadania[j].Time);
                     write_text.WriteLine(all_zadania[j].CurrentStatus);
                     write_text.WriteLine();
                 }
@@ -311,6 +335,7 @@ namespace Project
                 all_zadania[number].TextZadania = streamReader.ReadLine();
                 all_zadania[number].Date = Convert.ToDateTime(streamReader.ReadLine());
                 all_zadania[number].Remind = Convert.ToBoolean(streamReader.ReadLine());
+                all_zadania[number].Time = streamReader.ReadLine();
                 all_zadania[number].CurrentStatus = Convert.ToByte(streamReader.ReadLine());
                 streamReader.ReadLine();
                 number++;
@@ -352,6 +377,12 @@ namespace Project
                 else ReadForFile(file.Name.ToString());
             }
         }
+        private void TimePicker_LostFocus(object sender, RoutedEventArgs e)
+        {
+            int numer_zadania = Convert.ToInt32((sender as DateTimePicker).Name.Remove(0, 4));
+            all_zadania[numer_zadania].Time = (sender as DateTimePicker).Text.ToString();
+            SaveToFile();
+        }
         #endregion
 
         #region Start with Windows
@@ -382,13 +413,14 @@ namespace Project
         }
         #endregion
 
-
+        #region Робота з нагадуваннями
         private MediaPlayer player = new MediaPlayer();
         private string mp3_filename;
+        DispatcherTimer dispatcherTimer;
 
         private void TestMP3_Click(object sender, RoutedEventArgs e)
         {
-            if (MusicLocationText.Text!="")
+            if (MusicLocationText.Text != "")
             {
                 if (TestMP3btn.Content.ToString() == "Test MP3")
                 {
@@ -396,7 +428,7 @@ namespace Project
                     player.Play();
                     TestMP3btn.Content = " ■ ";
                 }
-                else if(TestMP3btn.Content.ToString() == " ■ ")
+                else if (TestMP3btn.Content.ToString() == " ■ ")
                 {
                     player.Stop();
                     TestMP3btn.Content = "Test MP3";
@@ -412,12 +444,33 @@ namespace Project
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.DefaultExt = ".mp3";
-            ofd.Filter = "mp3 files (*.mp3)|*.mp3|All files (*.*)|*.*"; 
+            ofd.Filter = "mp3 files (*.mp3)|*.mp3|All files (*.*)|*.*";
             if (ofd.ShowDialog() == true)
             {
                 mp3_filename = ofd.FileName;
                 MusicLocationText.Text = ofd.SafeFileName;
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            dispatcherTimer.Start();
+        }
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            if (mp3_filename != null)
+            {
+                if (DateTime.Now.ToLongTimeString() == TimePicker.Text.ToString())
+                {
+                    player.Play();
+                }
+            }
+        }
+
+        #endregion
     }
 }

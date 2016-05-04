@@ -94,7 +94,7 @@ namespace Project.Data
             if (ofd.ShowDialog() == true)
             {
                 filename = ofd.FileName;
-                shortfilename = Path.GetFileName(ofd.FileName);
+                shortfilename = ofd.SafeFileName;
                 text = File.ReadAllText(ofd.FileName);
                 text = text.Remove(text.Length - 2, 2);
                 Decryption(ref text);

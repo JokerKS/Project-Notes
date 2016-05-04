@@ -20,9 +20,7 @@ namespace Project.Data
         enum Status:byte {InProgress=0, Completed=1, Wasted=2 };
         byte current_status;
 
-        byte hour;
-        byte minute;
-        byte seconds;
+        string time;
 
         bool remind;
 
@@ -55,6 +53,12 @@ namespace Project.Data
         {
             get { return date; }
             set { date = value; }
+        }
+
+        public string Time
+        {
+            get { return time; }
+            set { time = value; }
         }
 
         public bool Remind

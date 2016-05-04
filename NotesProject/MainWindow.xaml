@@ -273,12 +273,17 @@
                         <StackPanel Grid.Row="2"
                                     HorizontalAlignment="Center"
                                     Orientation="Horizontal">
-                            <TextBlock FontSize="28" Text="Czas: " />
-                            <xctk:DateTimePicker DefaultValue="00:00:00"
+                            <TextBlock FontSize="28" Text="Czas:" />
+                            <xctk:DateTimePicker Name="TimePicker"
+                                                 Margin="5,0,0,0"
+                                                 DefaultValue="00:00:00"
                                                  DisplayDefaultValueOnEmptyText="True"
                                                  FontSize="28"
                                                  Format="LongTime"
                                                  ShowDropDownButton="False" />
+                            <Button Margin="5,0,0,0"
+                                    Click="Button_Click"
+                                    Content=" Start " />
                         </StackPanel>
                     </Grid>
                 </TabItem.Content>
