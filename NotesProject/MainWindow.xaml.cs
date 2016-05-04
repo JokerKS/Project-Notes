@@ -3,19 +3,12 @@ using Project.Data;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Threading;
+using Xceed.Wpf.Toolkit;
 
 namespace Project
 {
@@ -388,5 +381,43 @@ namespace Project
             }
         }
         #endregion
+
+
+        private MediaPlayer player = new MediaPlayer();
+        private string mp3_filename;
+
+        private void TestMP3_Click(object sender, RoutedEventArgs e)
+        {
+            if (MusicLocationText.Text!="")
+            {
+                if (TestMP3btn.Content.ToString() == "Test MP3")
+                {
+                    player.Open(new Uri(mp3_filename, UriKind.Relative));
+                    player.Play();
+                    TestMP3btn.Content = " ■ ";
+                }
+                else if(TestMP3btn.Content.ToString() == " ■ ")
+                {
+                    player.Stop();
+                    TestMP3btn.Content = "Test MP3";
+                }
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Najpierw wybierz plik MP3!");
+            }
+        }
+
+        private void ChooseMP3_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.DefaultExt = ".mp3";
+            ofd.Filter = "mp3 files (*.mp3)|*.mp3|All files (*.*)|*.*"; 
+            if (ofd.ShowDialog() == true)
+            {
+                mp3_filename = ofd.FileName;
+                MusicLocationText.Text = ofd.SafeFileName;
+            }
+        }
     }
 }

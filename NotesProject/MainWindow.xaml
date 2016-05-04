@@ -5,6 +5,7 @@
         xmlns:local="clr-namespace:Project"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         Title="Notes"
         Width="600"
         Height="400"
@@ -244,6 +245,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                     HorizontalAlignment="Center"
@@ -252,13 +254,32 @@
                             <DatePicker Margin="5" SelectedDate="{x:Static sys:DateTime.Now}" />
                         </StackPanel>
                         <DockPanel Grid.Row="1">
-                            <Button Margin="5"
-                                    Content="Melodia"
+                            <Button Height="24"
+                                    Margin="5,5,5,0"
+                                    VerticalAlignment="Top"
+                                    Click="ChooseMP3_Click"
+                                    Content="Wybrać plik muzyczny"
                                     DockPanel.Dock="Left" />
-                            <TextBox Margin="5"
+                            <Button Name="TestMP3btn"
+                                    Margin="5"
+                                    Click="TestMP3_Click"
+                                    Content="Test MP3"
+                                    DockPanel.Dock="Right" />
+                            <TextBox Name="MusicLocationText"
+                                     Margin="5"
                                      DockPanel.Dock="Top"
                                      IsReadOnly="True" />
                         </DockPanel>
+                        <StackPanel Grid.Row="2"
+                                    HorizontalAlignment="Center"
+                                    Orientation="Horizontal">
+                            <TextBlock FontSize="28" Text="Czas: " />
+                            <xctk:DateTimePicker DefaultValue="00:00:00"
+                                                 DisplayDefaultValueOnEmptyText="True"
+                                                 FontSize="28"
+                                                 Format="LongTime"
+                                                 ShowDropDownButton="False" />
+                        </StackPanel>
                     </Grid>
                 </TabItem.Content>
             </TabItem>
