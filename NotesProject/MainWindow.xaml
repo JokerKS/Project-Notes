@@ -14,6 +14,13 @@
         Background="AliceBlue"
         FontSize="14"
         mc:Ignorable="d">
+    <Window.Resources>
+        <ContextMenu x:Key="TrayMenu">
+            <MenuItem Click="ShowHideMainWindow" Header="Ukryj" />
+            <Separator />
+            <MenuItem Click="MenuExitClick" Header="Zamknij" />
+        </ContextMenu>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
