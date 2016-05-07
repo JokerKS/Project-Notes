@@ -10,13 +10,14 @@ using System.Windows.Controls;
 
 namespace Project.Data
 {
-    class Zadania
+    public class Zadania
     {
 
         string text_zadania;
         DateTime date;
         Image img;
 
+        bool setwindow = false;
         enum Status:byte {InProgress=0, Completed=1, Wasted=2 };
         byte current_status;
 
@@ -30,7 +31,11 @@ namespace Project.Data
             current_status = (byte)Status.InProgress;
             remind = false;
         }
-
+        public bool Window
+        {
+            get { return setwindow; }
+            set { setwindow = value; }
+        }
         public string TextZadania
         {
             get { return text_zadania; }

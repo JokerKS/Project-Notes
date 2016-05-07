@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using NotesProject;
 using Project.Data;
 using System;
 using System.Collections.Generic;
@@ -101,7 +102,7 @@ namespace Project
 
         #region Робота з списком завдань
         int number = 0;
-        List<Zadania> all_zadania = new List<Zadania>();
+        public List<Zadania> all_zadania = new List<Zadania>();
         private void AddTask_Click(object sender, RoutedEventArgs e)
         {
             all_zadania.Add(new Zadania());
@@ -321,6 +322,7 @@ namespace Project
                     write_text.WriteLine();
                 }
                 write_text.Close();
+                shrem = new ShowReminder(this);
             }
         }
         private void ReadForFile(string name)
@@ -342,7 +344,7 @@ namespace Project
                 number++;
             }
             streamReader.Close();
-
+            shrem = new ShowReminder(this);
             Redraw();
         }
 
@@ -474,6 +476,7 @@ namespace Project
 
         #endregion
 
+        #region Робота з треєм
         private System.Windows.Forms.NotifyIcon TrayIcon = null;
         private ContextMenu TrayMenu = null;
 
@@ -589,5 +592,8 @@ namespace Project
             CanClose = true;
             Close();
         }
+        #endregion
+
+        ShowReminder shrem;
     }
 }
