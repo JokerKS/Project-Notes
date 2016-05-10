@@ -11,14 +11,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Project.Data;
 using Project;
 using System.Windows.Threading;
 using System.Timers;
+using Project.Data;
 
-namespace NotesProject
+namespace NotesProject.Data
 {
-    public partial class ShowReminder : Window
+    class ShowReminder
     {
         MainWindow form;
 
@@ -29,13 +29,12 @@ namespace NotesProject
 
         public ShowReminder(MainWindow f)
         {
-            InitializeComponent();
             remList = new List<Zadania>();
             form = f;
 
             for (int i = 0; i < f.all_zadania.Count; i++)
             {
-                if (f.all_zadania[i].Remind && f.all_zadania[i].Date>DateTime.Now)
+                if (f.all_zadania[i].Remind && f.all_zadania[i].Date > DateTime.Now)
                 {
                     remList.Add(f.all_zadania[i]);
                 }

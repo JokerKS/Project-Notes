@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using NotesProject;
+using NotesProject.Data;
 using Project.Data;
 using System;
 using System.Collections.Generic;
@@ -116,7 +117,6 @@ namespace Project
         }
         private void DeleteTask_Click(object sender, EventArgs e)
         {
-            //znajdujemy numer zadania
             int numer_zadania = Convert.ToInt32((sender as Button).Name.Remove(0, 5));
             all_zadania.RemoveAt(numer_zadania);
             number--;
