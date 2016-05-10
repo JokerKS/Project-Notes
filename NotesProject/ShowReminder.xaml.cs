@@ -25,6 +25,8 @@ namespace NotesProject
         List<Zadania> remList;
         DispatcherTimer timer;
 
+        DateTime startdate, finishdate;
+
         public ShowReminder(MainWindow f)
         {
             InitializeComponent();
@@ -33,27 +35,29 @@ namespace NotesProject
 
             for (int i = 0; i < f.all_zadania.Count; i++)
             {
-                if (f.all_zadania[i].Remind && f.all_zadania[i].Time != null)
+                if (f.all_zadania[i].Remind && f.all_zadania[i].Date>DateTime.Now)
                 {
                     remList.Add(f.all_zadania[i]);
                 }
             }
-            timer = new DispatcherTimer();
-            timer.Tick += new EventHandler(Timer_Tick);
-            timer.Interval = new TimeSpan(0, 0, 1);
-            timer.Start();
+            if (remList.Count > 0)
+            {
+                timer = new DispatcherTimer();
+                timer.Tick += new EventHandler(Timer_Tick);
+                timer.Interval = new TimeSpan(0, 0, 1);
+                timer.Start();
+            }
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            string datetime;
-            string datenow = DateTime.Now.ToString();
+            DateTime now = DateTime.Now;
             for (int i = 0; i < remList.Count; i++)
             {
-                datetime = remList[i].Date.ToShortDateString() + " " + remList[i].Time;
-                if (datenow == datetime)
+                if (now.ToString() == remList[i].Date.ToString())
                 {
                     CreateReminder(remList[i]);
+                    remList.Remove(remList[i]);
                 }
             }
         }

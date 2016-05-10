@@ -14,7 +14,7 @@ namespace Project.Data
     {
 
         string text_zadania;
-        DateTime date;
+        DateTime datetime;
         Image img;
 
         bool setwindow = false;
@@ -56,14 +56,18 @@ namespace Project.Data
         }
         public DateTime Date
         {
-            get { return date; }
-            set { date = value; }
+            get { return datetime; }
+            set { datetime = value; }
         }
 
-        public string Time
+        public TimeSpan Time
         {
-            get { return time; }
-            set { time = value; }
+            get { return datetime.TimeOfDay; }
+            set
+            {
+                datetime -= datetime.TimeOfDay;
+                datetime += value;
+            }
         }
 
         public bool Remind

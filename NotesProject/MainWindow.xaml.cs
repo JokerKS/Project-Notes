@@ -231,7 +231,7 @@ namespace Project
                 dtpick.Name = "time" + count;
                 dtpick.Format = DateTimeFormat.LongTime;
                 dtpick.ShowDropDownButton = false;
-                dtpick.Text = all_zadania[count].Time;
+                dtpick.Text = all_zadania[count].Time.ToString();
                 dtpick.FontSize = 20;
                 dtpick.LostFocus += new RoutedEventHandler(TimePicker_LostFocus);
                 sp.Children.Add(dtpick);
@@ -294,7 +294,7 @@ namespace Project
         {
             int numer_zadania = Convert.ToInt32((sender as CheckBox).Name.Remove(0, 4));
             all_zadania[numer_zadania].Remind = false;
-            all_zadania[numer_zadania].Time = null;
+            all_zadania[numer_zadania].Time = new TimeSpan(0,0,0);
             SaveToFile();
             Redraw();
         }
@@ -338,7 +338,7 @@ namespace Project
                 all_zadania[number].TextZadania = streamReader.ReadLine();
                 all_zadania[number].Date = Convert.ToDateTime(streamReader.ReadLine());
                 all_zadania[number].Remind = Convert.ToBoolean(streamReader.ReadLine());
-                all_zadania[number].Time = streamReader.ReadLine();
+                all_zadania[number].Time = TimeSpan.Parse(streamReader.ReadLine());
                 all_zadania[number].CurrentStatus = Convert.ToByte(streamReader.ReadLine());
                 streamReader.ReadLine();
                 number++;
@@ -383,7 +383,7 @@ namespace Project
         private void TimePicker_LostFocus(object sender, RoutedEventArgs e)
         {
             int numer_zadania = Convert.ToInt32((sender as DateTimePicker).Name.Remove(0, 4));
-            all_zadania[numer_zadania].Time = (sender as DateTimePicker).Text.ToString();
+            all_zadania[numer_zadania].Time = TimeSpan.Parse((sender as DateTimePicker).Text);
             SaveToFile();
         }
         #endregion
