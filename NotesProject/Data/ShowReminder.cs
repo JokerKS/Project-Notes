@@ -25,8 +25,6 @@ namespace NotesProject.Data
         List<Zadania> remList;
         DispatcherTimer timer;
 
-        DateTime startdate, finishdate;
-
         public ShowReminder(MainWindow f)
         {
             remList = new List<Zadania>();
@@ -41,6 +39,7 @@ namespace NotesProject.Data
             }
             if (remList.Count > 0)
             {
+                remList = SortAscending(remList);
                 timer = new DispatcherTimer();
                 timer.Tick += new EventHandler(Timer_Tick);
                 timer.Interval = new TimeSpan(0, 0, 1);
@@ -48,17 +47,40 @@ namespace NotesProject.Data
             }
         }
 
+        static List<Zadania> SortAscending(List<Zadania> list)
+        {
+            List<DateTime> l = new List<DateTime>();
+            for (int i = 0; i < list.Count; i++)
+                l.Add(list[i].Date);
+            l.Sort((a, b) => a.CompareTo(b));
+
+
+            List<Zadania> newlist = new List<Zadania>();
+            for (int i = 0, j=0; i < list.Count && j < list.Count; i++)
+            {
+                if (l[j] == list[i].Date)
+                {
+                    newlist.Add(list[i]);
+                    list.Remove(list[i]);
+                    j++;
+                    i = 0;
+                }
+            }
+            return newlist;
+        }
+
         private void Timer_Tick(object sender, EventArgs e)
         {
             DateTime now = DateTime.Now;
-            for (int i = 0; i < remList.Count; i++)
+            if (remList.Count > 0)
             {
-                if (now.ToString() == remList[i].Date.ToString())
+                if (now.ToString() == remList[0].Date.ToString())
                 {
-                    CreateReminder(remList[i]);
-                    remList.Remove(remList[i]);
+                    CreateReminder(remList[0]);
+                    remList.Remove(remList[0]);
                 }
             }
+            else timer.Stop();
         }
 
         private void CreateReminder(Zadania obj)
