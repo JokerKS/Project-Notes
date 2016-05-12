@@ -89,12 +89,40 @@ namespace NotesProject.Data
             if (!obj.Window)
             {
                 Window window = new Window();
-                window.Content = obj.TextZadania;
+                //window.Content = obj.TextZadania;
                 //window.Topmost = true;
                 window.MaxHeight = 300;
                 window.MaxWidth = 300;
                 window.Show();
                 obj.Window = true;
+
+                Grid gr = new Grid();
+                gr.Margin = new Thickness(5, 5, 5, 5);
+                ColumnDefinition c1 = new ColumnDefinition();
+                ColumnDefinition c2 = new ColumnDefinition();
+                ColumnDefinition c3 = new ColumnDefinition();
+                c1.Width = GridLength.Auto;
+                c2.Width = new GridLength(1, GridUnitType.Star);
+                c3.Width = GridLength.Auto;
+                gr.ColumnDefinitions.Add(c1);
+                gr.ColumnDefinitions.Add(c2);
+                gr.ColumnDefinitions.Add(c3);
+
+                Image img = new Image();
+                img.MinHeight = img.MinWidth = 40;
+                img.MaxHeight = img.MaxWidth = 100;
+
+                BitmapImage bi = new BitmapImage();
+                bi.BeginInit();
+                bi.UriSource = new Uri("Data\\Images\\image.png", UriKind.Relative);
+                bi.EndInit();
+
+                img.Source = bi;
+                Grid.SetColumn(img, 1);
+                gr.Children.Add(img);
+
+                //???????
+                window.Content = gr;
             }
         }
     }
