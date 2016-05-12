@@ -40,6 +40,7 @@ namespace NotesProject.Data
             if (remList.Count > 0)
             {
                 remList = SortAscending(remList);
+                //ViewList(remList);
                 timer = new DispatcherTimer();
                 timer.Tick += new EventHandler(Timer_Tick);
                 timer.Interval = new TimeSpan(0, 0, 1);
@@ -54,9 +55,8 @@ namespace NotesProject.Data
                 l.Add(list[i].Date);
             l.Sort((a, b) => a.CompareTo(b));
 
-
             List<Zadania> newlist = new List<Zadania>();
-            for (int i = 0, j=0; i < list.Count && j < list.Count; i++)
+            for (int i = 0, j=0; i < list.Count && j < l.Count;)
             {
                 if (l[j] == list[i].Date)
                 {
@@ -65,6 +65,7 @@ namespace NotesProject.Data
                     j++;
                     i = 0;
                 }
+                else i++;
             }
             return newlist;
         }

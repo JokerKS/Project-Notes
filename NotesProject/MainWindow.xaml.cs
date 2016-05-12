@@ -23,9 +23,19 @@ namespace Project
             InitMainMenu();
             InitializeNotatnik();
             createTrayIcon();
+            InitialReminder();
         }
 
-
+        private void InitialReminder()
+        {
+            string datetimenow = "zadania" + DateTime.Now.Day + "_" + DateTime.Now.Month + "_" +
+                DateTime.Now.Year+".txt";
+            FileInfo file = new FileInfo(datetimenow);
+            if (file.Exists)
+            {
+                ReadForFile(file.Name.ToString());
+            }
+        }
 
         #region Робота з блокнотом
 
@@ -300,9 +310,13 @@ namespace Project
         }
         private void Text_LostFocus(object sender, RoutedEventArgs e)
         {
-            SaveToFile();
+            if ((sender as TextBox).Text != null)
+            {
+                SaveToFile();
+            }
         }
 
+        ShowReminder shrem;
         private void SaveToFile()
         {
             FileInfo file = new FileInfo("zadania" + DateZadania.SelectedDate.Value.Day + "_"
@@ -594,6 +608,5 @@ namespace Project
         }
         #endregion
 
-        ShowReminder shrem;
     }
 }
