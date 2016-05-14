@@ -21,8 +21,6 @@ namespace Project.Data
         enum Status:byte {InProgress=0, Completed=1, Wasted=2 };
         byte current_status;
 
-        string time;
-
         bool remind;
 
         public Zadania()
@@ -58,6 +56,11 @@ namespace Project.Data
         {
             get { return datetime; }
             set { datetime = value; }
+        }
+
+        public void AddTime(TimeSpan x)
+        {
+            datetime += x;
         }
 
         public TimeSpan Time

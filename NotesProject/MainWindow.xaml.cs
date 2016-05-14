@@ -206,6 +206,7 @@ namespace Project
             TextBox txt = new TextBox();
             txt.Name = "txt" + count;
             txt.Margin = new Thickness(5, 0, 5, 0);
+            txt.TextWrapping = TextWrapping.Wrap;
             txt.DataContext = all_zadania[count];
             var binding = new Binding("TextZadania");
             binding.Mode = BindingMode.TwoWay;
