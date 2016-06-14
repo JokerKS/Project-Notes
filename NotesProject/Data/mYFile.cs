@@ -13,6 +13,7 @@ namespace Project.Data
     {
         private static string format = ".jks";
         private static string key = "KażtomęczyK";
+        private static string lastkey = "JejHW42Ejsek";
 
         private string filename = null;
         private string shortfilename = null;
@@ -71,7 +72,7 @@ namespace Project.Data
         {
             var enc = new UTF32Encoding();
             Byte[] encodedKey = enc.GetBytes(key);
-
+            Byte[] encodedLastKey = enc.GetBytes(lastkey);
             Byte[] encodedData = enc.GetBytes(data);
 
             for (int i = 0, k = 0; i < encodedData.Length; i++)
@@ -81,6 +82,14 @@ namespace Project.Data
                     k = 0;
                 else k++; 
             }
+            for (int i = 0, k = 0; i < encodedData.Length; i++)
+            {
+                encodedData[i] += encodedLastKey[k];
+                if (k == encodedLastKey.Length - 1)
+                    k = 0;
+                else k++;
+            }
+
             data = enc.GetString(encodedData);
         }
 
@@ -106,8 +115,16 @@ namespace Project.Data
         {
             var enc = new UTF32Encoding();
             Byte[] encodedKey = enc.GetBytes(key);
+            Byte[] encodedLastKey = enc.GetBytes(lastkey);
             Byte[] encodedData = enc.GetBytes(data);
 
+            for (int i = 0, k = 0; i < encodedData.Length; i++)
+            {
+                encodedData[i] -= encodedLastKey[k];
+                if (k == encodedLastKey.Length - 1)
+                    k = 0;
+                else k++;
+            }
             for (int i = 0, k = 0; i < encodedData.Length; i++)
             {
                 encodedData[i] -= encodedKey[k];

@@ -36,6 +36,14 @@
                               Click="StartWithWindows_NoClick"
                               Header="Nie" />
                 </MenuItem>
+                <MenuItem Header="A reminder on top of all Windows">
+                    <MenuItem Header="Tak" />
+                    <MenuItem Header="Nie" />
+                </MenuItem>
+                <MenuItem Header="Reminder with music">
+                    <MenuItem Header="Tak" />
+                    <MenuItem Header="Nie" />
+                </MenuItem>
             </MenuItem>
         </Menu>
         <TabControl Name="AllPagesTabControl"

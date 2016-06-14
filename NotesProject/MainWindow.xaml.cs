@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using NotesProject;
 using NotesProject.Data;
 using Project.Data;
 using System;
@@ -15,58 +14,68 @@ using Xceed.Wpf.Toolkit;
 
 namespace Project
 {
+    /// <summary>
+    /// Основне вікно програми, яке наслідуване від класу Window
+    /// </summary>
     public partial class MainWindow : Window
     {
+        // Підсказка
+        ToolTip toolTipBtnX;
+        // Змінна типу mYFile для роботи з збереженням, шифруванням, дешифруванням
+        mYFile file;
+        // Ліста для збереження всіх завдань користувача
+        public List<Zadania> all_zadania = new List<Zadania>();
+        // Для роботи з треєм
+        private System.Windows.Forms.NotifyIcon TrayIcon = null;
+        private ContextMenu TrayMenu = null;
+        // Флаг, який визначає чи можна вийти з програми
+        private bool fCanClose = false;
+
+        /// <summary>
+        /// Конструктор вікна, в якому ініціалізуються його елементи
+        /// а також створюються інші запрограмовані елементи
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
+            // Створення об'єкту mYFile для подальшої роботи з ним
+            file = new mYFile();
+            // Функція, яка визначає значення для меню - start with windows
             InitMainMenu();
-            InitializeNotatnik();
+            // Створення трей іконки
             createTrayIcon();
-            InitialReminder();
-        }
 
-        private void InitialReminder()
-        {
-            string datetimenow = "zadania" + DateTime.Now.Day + "_" + DateTime.Now.Month + "_" +
-                DateTime.Now.Year+".txt";
-            FileInfo file = new FileInfo(datetimenow);
-            if (file.Exists)
-            {
-                ReadForFile(file.Name.ToString());
-            }
+            InitialReminder();
+
+            // Підсказка для нагадувань
+            toolTipBtnX = new ToolTip();
+            toolTipBtnX.Background = Brushes.White;
+            toolTipBtnX.Content = "Usuń zadanie";
         }
 
         #region Робота з блокнотом
-
-        mYFile f;
-
-        private void InitializeNotatnik()
-        {
-            f = new mYFile();
-        }
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
         private void SaveAs_Click(object sender, RoutedEventArgs e)
         {
-            f.SaveAsToFile(text.Text);
-            string file_name = f.ShortFileName;
+            file.SaveAsToFile(text.Text);
+            string file_name = file.ShortFileName;
             if (file_name != null)
                 MainFile.Header = file_name;
         }
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            f.SaveToFile(text.Text);
-            string file_name = f.ShortFileName;
+            file.SaveToFile(text.Text);
+            string file_name = file.ShortFileName;
             if (file_name != null)
                 MainFile.Header = file_name;
         }
         private void Open_Click(object sender, RoutedEventArgs e)
         {
-            string my_text = f.OpenFromFile();
-            string file_name = f.ShortFileName;
+            string my_text = file.OpenFromFile();
+            string file_name = file.ShortFileName;
             if (my_text != null)
                 text.Text = my_text;
             if (file_name != null)
@@ -74,7 +83,7 @@ namespace Project
         }
         private void New_Click(object sender, RoutedEventArgs e)
         {
-            f.RemoveFileName();
+            file.RemoveFileName();
             MainFile.Header = "JKSnot.jks";
             text.Clear();
         }
@@ -113,7 +122,6 @@ namespace Project
 
         #region Робота з списком завдань
         int number = 0;
-        public List<Zadania> all_zadania = new List<Zadania>();
         private void AddTask_Click(object sender, RoutedEventArgs e)
         {
             all_zadania.Add(new Zadania());
@@ -213,6 +221,10 @@ namespace Project
             txt.SetBinding(TextBox.TextProperty, binding);
             txt.LostFocus += new RoutedEventHandler(Text_LostFocus);
 
+            ToolTip toolTip = new ToolTip();
+            toolTip.Background = Brushes.White;
+            txt.ToolTip = toolTip;
+
             Grid.SetColumn(txt, 2);
             gr.Children.Add(txt);
 
@@ -233,10 +245,18 @@ namespace Project
             ch.DataContext = all_zadania[count];
             sp.Children.Add(ch);
 
+            ToolTip toolTip3 = new ToolTip();
+            toolTip3.Background = Brushes.White;
+
             if (all_zadania[count].Remind)
             {
                 ch.Content = "Tak";
                 ch.IsChecked = true;
+
+                toolTip3.Content = "Wyłączyć przypomnienie";
+                ch.ToolTip = toolTip3;
+
+                toolTip.Content = "Tekst zadania i przypomnienie";
 
                 DateTimePicker dtpick = new DateTimePicker();
                 dtpick.Name = "time" + count;
@@ -251,6 +271,10 @@ namespace Project
             {
                 ch.Content = "Nie";
                 ch.IsChecked = false;
+
+                toolTip3.Content = "Włączyć przypomnienie";
+                ch.ToolTip = toolTip3;
+                toolTip.Content = "Tekst zadania";
             }
             ch.Checked += new RoutedEventHandler(CheckedChanged);
             ch.Unchecked += new RoutedEventHandler(UnCheckedChanged);
@@ -264,6 +288,8 @@ namespace Project
             btn_X.Content = "X";
             btn_X.Margin = new Thickness(0, 0, 5, 0);
             btn_X.Click += new RoutedEventHandler(DeleteTask_Click);
+            btn_X.ToolTip = toolTipBtnX;
+
             Grid.SetColumn(btn_X, 4);
             gr.Children.Add(btn_X);
 
@@ -311,10 +337,7 @@ namespace Project
         }
         private void Text_LostFocus(object sender, RoutedEventArgs e)
         {
-            if ((sender as TextBox).Text != null)
-            {
-                SaveToFile();
-            }
+            SaveToFile();
         }
 
         ShowReminder shrem;
@@ -432,6 +455,17 @@ namespace Project
         #endregion
 
         #region Робота з нагадуваннями
+        private void InitialReminder()
+        {
+            string datetimenow = "zadania" + DateTime.Now.Day + "_" + DateTime.Now.Month + "_" +
+                DateTime.Now.Year + ".txt";
+            FileInfo file = new FileInfo(datetimenow);
+            if (file.Exists)
+            {
+                ReadForFile(file.Name.ToString());
+            }
+        }
+
         private MediaPlayer player = new MediaPlayer();
         private string mp3_filename;
         DispatcherTimer dispatcherTimer;
@@ -492,20 +526,16 @@ namespace Project
         #endregion
 
         #region Робота з треєм
-        private System.Windows.Forms.NotifyIcon TrayIcon = null;
-        private ContextMenu TrayMenu = null;
-
         private bool createTrayIcon()
         {
             bool result = false;
             if (TrayIcon == null)
-            { // только если мы не создали иконку ранее
-                TrayIcon = new System.Windows.Forms.NotifyIcon(); // создаем новую
-                TrayIcon.Icon = NotesProject.Properties.Resources.TreyIcon; // изображение для трея
-                                                                            // обратите внимание, за ресурсом с картинкой мы лезем в свойства проекта, а не окна,
-                                                                            // поэтому нужно указать полный namespace
-                TrayIcon.Text = "Ku-ku"; // текст подсказки, всплывающей над иконкой
-                TrayMenu = Resources["TrayMenu"] as ContextMenu; // а здесь уже ресурсы окна и тот самый x:Key
+            {
+                TrayIcon = new System.Windows.Forms.NotifyIcon();
+                TrayIcon.Icon = NotesProject.Properties.Resources.TreyIcon;
+                TrayIcon.Text = "Ku-ku";
+                // а здесь уже ресурсы окна и тот самый x:Key
+                TrayMenu = Resources["TrayMenu"] as ContextMenu; 
 
                 // сразу же опишем поведение при щелчке мыши, о котором мы говорили ранее
                 // это будет просто анонимная функция, незачем выносить ее в класс окна
@@ -519,21 +549,22 @@ namespace Project
                     else {
                         // по правой кнопке (и всем остальным) показываем меню
                         TrayMenu.IsOpen = true;
-                        Activate(); // нужно отдать окну фокус, см. ниже
+                        // нужно отдать окну фокус
+                        Activate(); 
                     }
                 };
                 result = true;
             }
-            else { // все переменные были созданы ранее
-                result = true;
-            }
-            TrayIcon.Visible = true; // делаем иконку видимой в трее
+            else result = true;
+            // делаем иконку видимой в трее
+            TrayIcon.Visible = true; 
             return result;
         }
 
         private void ShowHideMainWindow(object sender, RoutedEventArgs e)
         {
-            TrayMenu.IsOpen = false; // спрячем менюшку, если она вдруг видима
+            // спрячем менюшку, если она вдруг видима
+            TrayMenu.IsOpen = false; 
             if (IsVisible)
             {
                 Hide();
@@ -544,9 +575,10 @@ namespace Project
                 Show();
                 (TrayMenu.Items[0] as MenuItem).Header = "Ukryj";
                 WindowState = CurrentWindowState;
-                Activate(); // обязательно нужно отдать фокус окну,
-                            // иначе пользователь сильно удивится, когда увидит окно
-                            // но не сможет в него ничего ввести с клавиатуры
+                // обязательно нужно отдать фокус окну,
+                // иначе пользователь сильно удивится, когда увидит окно
+                // но не сможет в него ничего ввести с клавиатуры
+                Activate(); 
             }
         }
 
@@ -560,7 +592,8 @@ namespace Project
         // переопределяем встроенную реакцию на изменение состояния сознания окна
         protected override void OnStateChanged(EventArgs e)
         {
-            base.OnStateChanged(e); // системная обработка
+            // системная обработка
+            base.OnStateChanged(e); 
             if (this.WindowState == System.Windows.WindowState.Minimized)
             {
                 // если окно минимизировали, просто спрячем
@@ -574,9 +607,8 @@ namespace Project
             }
         }
 
-        private bool fCanClose = false;
         public bool CanClose
-        { // флаг, позволяющий или запрещающий выход из приложения
+        { 
             get { return fCanClose; }
             set { fCanClose = value; }
         }
@@ -584,20 +616,23 @@ namespace Project
         // переопределяем обработчик запроса выхода из приложения
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
-            base.OnClosing(e); // встроенная обработка
+            // встроенная обработка
+            base.OnClosing(e); 
             if (!CanClose)
-            {    // если нельзя закрывать
+            {   
+                // если нельзя закрывать
                 e.Cancel = true;
-                //выставляем флаг отмены закрытия
-              // запоминаем текущее состояние окна
+                // выставляем флаг отмены закрытия
+                // запоминаем текущее состояние окна
                 CurrentWindowState = this.WindowState;
                 // меняем надпись в менюшке
                 (TrayMenu.Items[0] as MenuItem).Header = "Pokaż";
                 // прячем окно
                 Hide();
             }
-            else { // все-таки закрываемся
-                   // убираем иконку из трея
+            else
+            { 
+                // убираем иконку из трея
                 TrayIcon.Visible = false;
             }
         }
