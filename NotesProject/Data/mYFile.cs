@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Project.Data
 {
-    class mYFile
+    public class mYFile
     {
         private static string format = ".jks";
         private static string key = "KażtomęczyK";
@@ -64,7 +64,7 @@ namespace Project.Data
             else SaveAsToFile(data);
         }
 
-        private static void Encryption(ref string data)
+        public static void Encryption(ref string data)
         {
             var enc = new UTF32Encoding();
             Byte[] encodedKey = enc.GetBytes(key);
@@ -107,7 +107,7 @@ namespace Project.Data
             return text;
         }
 
-        private static void Decryption(ref string data)
+        public static void Decryption(ref string data)
         {
             var enc = new UTF32Encoding();
             Byte[] encodedKey = enc.GetBytes(key);
