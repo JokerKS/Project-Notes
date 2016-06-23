@@ -37,8 +37,13 @@
                               Header="Nie" />
                 </MenuItem>
                 <MenuItem Header="A reminder on top of all Windows">
-                    <MenuItem Header="Tak" />
-                    <MenuItem Header="Nie" />
+                    <MenuItem Name="YesTopWindowBtn"
+                              Click="MenuItem_Click"
+                              Header="Tak"
+                              IsChecked="True" />
+                    <MenuItem Name="NoTopWindowBtn"
+                              Click="MenuItem_Click"
+                              Header="Nie" />
                 </MenuItem>
                 <MenuItem Header="Reminder with music">
                     <MenuItem Header="Tak" />

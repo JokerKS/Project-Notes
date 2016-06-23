@@ -17,6 +17,8 @@ namespace NotesProject.Data
         List<Zadania> remList;
         DispatcherTimer timer;
 
+        public static bool fTopWindow = false;
+
         public ShowReminder(MainWindow f)
         {
             remList = new List<Zadania>();
@@ -82,6 +84,7 @@ namespace NotesProject.Data
             if (!obj.Window)
             {
                 Window window = new Window();
+                window.Topmost = fTopWindow;
                 window.MaxHeight = 170;
                 window.MaxWidth = 500;
                 window.Width = 500;

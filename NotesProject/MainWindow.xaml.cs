@@ -30,6 +30,7 @@ namespace Project
         private ContextMenu TrayMenu = null;
         // Флаг, який визначає чи можна вийти з програми
         private bool fCanClose = false;
+        private bool fTopOfAllWindow = false;
 
         /// <summary>
         /// Конструктор вікна, в якому ініціалізуються його елементи
@@ -644,5 +645,20 @@ namespace Project
         }
         #endregion
 
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            fTopOfAllWindow = !fTopOfAllWindow;
+            if(fTopOfAllWindow)
+            {
+                YesTopWindowBtn.IsChecked = true;
+                NoTopWindowBtn.IsChecked = false;
+            }
+            else
+            {
+                YesTopWindowBtn.IsChecked = false;
+                NoTopWindowBtn.IsChecked = true;
+            }
+            ShowReminder.fTopWindow = fTopOfAllWindow;
+        }
     }
 }

@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm10="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="d646ecdb-b2ce-446f-b7ec-cdf3ee09d720" name="UMLUseCaseDiagram1" linkedPackageId="eafaeca9-0ae7-4728-8f5f-21f8d45eef08" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <ownedCommentsInternal>
+    <comment Id="08c5d7e2-c008-4d9b-bf1a-bb8dfad7af5a">
+      <elementDefinition Id="6b5c45f2-eaff-4e16-ae31-8f40d43401df" />
+      <body>Rozszerza możliwości tworzenia zadań dodając możliwość przypomnienia zadań</body>
+      <annotatedElements>
+        <useCaseMoniker Id="d686b55f-a3f1-401c-a88d-78aca43fcb5b" LastKnownName="Ustawienie przypomnienia na stworzone zadania" />
+      </annotatedElements>
+    </comment>
+  </ownedCommentsInternal>
+  <profileInstances>
+    <packageHasProfileInstances Id="3a6fdf6f-29ee-4763-b4be-b8b2505acee7">
+      <profileInstance Id="7f292fbc-a5e2-4969-bd48-0bb73c8fe674" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="5e20778a-85e4-46bb-aa8c-daedb982d89e">
+      <profileInstance Id="83e7c39b-74ff-4339-a160-922150c3cff4" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <actor Id="69039b71-b290-45ff-8ac0-9808d4baf7fc" name="Użytkownik" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="9fe10865-0b13-48ac-8b68-e92faee41e12" />
+        <targetEnds>
+          <association Id="1eb9cb0d-eb11-4b53-8b83-d1d57bb8643b" isDerived="false" sourceEndRoleName="Użytkownik" targetEndRoleName="Tworzenie zadań na dzień" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="455e033d-bfb8-4774-9f5b-33a61cb7e00e" LastKnownName="Tworzenie zadań na dzień" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="e659a685-eb42-4829-a35d-44c02eb35a68" name="Użytkownik" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="94b49296-4d53-48ea-bf42-bb67cea89c22" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="f0cbe3bd-6897-419f-adac-36607cdaeae4" name="Tworzenie zadań na dzień" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="34ac0af0-3986-47da-b29f-03eab2714d16" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="ba4e6667-853a-4f7d-8e49-37529ff1f05b" />
+          </association>
+          <association Id="c495b8c8-82b0-47b5-a798-45bff57879a4" isDerived="false" sourceEndRoleName="Użytkownik" targetEndRoleName="Tworzenie wpisów w notesie" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="c6ddad29-35b2-4e4e-bb21-b1bd14b5f311" LastKnownName="Tworzenie wpisów w notesie" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="b5c81b76-aff0-439d-8931-26632e710d06" name="Użytkownik" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="92d8bc92-83a8-469a-9bf9-c7e65754d0df" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="33e68dd4-49ae-4694-9b9a-4e9bc2f1f47a" name="Tworzenie wpisów w notesie" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="7b457b72-69dd-4d88-a1b8-07785afce10b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="022770bc-1bf4-4251-8e6e-a1ddc471f869" />
+          </association>
+          <association Id="04a964c0-0c8b-4133-bc39-2d8750a124bc" isDerived="false" sourceEndRoleName="Użytkownik" targetEndRoleName="Tworzenie muzycznych przypomnień" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="c473fc7c-0180-4040-a5a4-16efb93fe428" LastKnownName="Tworzenie muzycznych przypomnień" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="d7012887-39ea-483a-9c51-736e9b4d5fb9" name="Użytkownik" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="66387488-fb16-44e4-aaef-cb2b3d3faa60" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="2087bb66-42c2-4c4d-bbda-f633cf457123" name="Tworzenie muzycznych przypomnień" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="92496e25-3b1f-486b-8c11-26f5349b43e5" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="2ff466c2-4d58-4db3-9927-379df0db44c8" />
+          </association>
+          <association Id="5482bd66-c62b-4d8d-8de3-8869c3ec3f8c" isDerived="false" sourceEndRoleName="Użytkownik" targetEndRoleName="Ustawienia startu programu razem z Windows&#xD;&#xA;" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="30ba6a19-69cd-405f-ae4f-8a79d159cbef" LastKnownName="Ustawienia startu programu razem z Windows&#xD;&#xA;" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="af6f9acc-d673-48e3-8088-8cc9261f143a" name="Użytkownik" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="992eb102-cd56-4a2c-a03f-acf3dfb7c888" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="1d25358f-606b-4393-95d4-c12a2c17f62b" name="Ustawienia startu programu razem z Windows&#xD;&#xA;" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="4d398e1a-b5d9-4b47-a46b-72999351d595" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="97ef7eb7-b54f-4062-a450-d122acf1ab93" />
+          </association>
+          <association Id="85b82480-2f71-4e11-af52-5805f02b440c" isDerived="false" sourceEndRoleName="Użytkownik" targetEndRoleName="Ustawienie przypomnienia na stworzone zadania" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="d686b55f-a3f1-401c-a88d-78aca43fcb5b" LastKnownName="Ustawienie przypomnienia na stworzone zadania" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="733d4eae-58d3-474f-aadb-b28e79bed60b" name="Użytkownik" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="7ad027d2-b71d-45db-8e53-9ca50e5ca2f3" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="1be1d965-f95e-4deb-bfcb-8d285e5254ff" name="Ustawienie przypomnienia na stworzone zadania" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="1a983a51-4f0d-4b00-b6aa-0025cfdfe0e6" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="6f84edb8-fc4c-4dc3-a3fa-ce16b5e8896a" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="455e033d-bfb8-4774-9f5b-33a61cb7e00e" name="Tworzenie zadań na dzień" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="b11db076-cefa-4487-824f-506cec58a450" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="c6ddad29-35b2-4e4e-bb21-b1bd14b5f311" name="Tworzenie wpisów w notesie" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="d189709d-934f-441c-8ddf-b235cd2210ea" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="c473fc7c-0180-4040-a5a4-16efb93fe428" name="Tworzenie muzycznych przypomnień" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="bcdc83a0-cfc8-4536-a146-3e2b3d433fe3" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="30ba6a19-69cd-405f-ae4f-8a79d159cbef" name="Ustawienia startu programu razem z Windows&#xD;&#xA;" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="15753593-3053-4475-aed4-1d66766c608c" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="d686b55f-a3f1-401c-a88d-78aca43fcb5b" name="Ustawienie przypomnienia na stworzone zadania" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="3f4326c4-2f23-4cb5-a799-33450c96d86b" />
+        <extendedCases>
+          <extend Id="48545995-6a6c-4ea8-977f-15eb57c311b2">
+            <useCaseMoniker Id="455e033d-bfb8-4774-9f5b-33a61cb7e00e" LastKnownName="Tworzenie zadań na dzień" />
+            <elementDefinition Id="e3f76fe6-f9b7-4669-82c8-d562a53d8532" />
+          </extend>
+        </extendedCases>
+      </useCase>
+    </useCaseModelRootHasTypes>
+  </packagedElements>
+  <package Id="eafaeca9-0ae7-4728-8f5f-21f8d45eef08" name="ModelingProject1">
+    <elementDefinition Id="04cf1da7-38ef-4a31-ac67-4ff8539a2ef9" />
+  </package>
+</useCaseModelRoot>

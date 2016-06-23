@@ -1,0 +1,311 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/UseCaseModel"
+  dslVersion="1.0.0.0"
+  Id="04cf1da7-38ef-4a31-ac67-4ff8539a2ef9"
+  name="ModelingProject1" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <ownedCommentsInternal>
+    <comment
+      Id="6b5c45f2-eaff-4e16-ae31-8f40d43401df">
+      <body>Rozszerza możliwości tworzenia zadań dodając możliwość przypomnienia zadań</body>
+      <annotatedElements>
+        <useCaseMoniker
+          Id="3f4326c4-2f23-4cb5-a799-33450c96d86b"
+          LastKnownName="Ustawienie przypomnienia na stworzone zadania"
+          LastKnownLocation="ModelingProject1.uml" />
+      </annotatedElements>
+    </comment>
+  </ownedCommentsInternal>
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
+      <profileInstance
+        Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791"
+        name="StandardProfileL2" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="29349502-908c-4fda-9054-c48619c59ed0">
+      <profileInstance
+        Id="532ea607-fb19-44b8-8502-3351b05452be"
+        name="StandardProfileL3" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <actor
+        Id="9fe10865-0b13-48ac-8b68-e92faee41e12"
+        name="Użytkownik"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="ba4e6667-853a-4f7d-8e49-37529ff1f05b"
+            isDerived="false"
+            sourceEndRoleName="Użytkownik"
+            targetEndRoleName="Tworzenie zadań na dzień"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="b11db076-cefa-4487-824f-506cec58a450"
+              LastKnownName="Tworzenie zadań na dzień"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="94b49296-4d53-48ea-bf42-bb67cea89c22"
+                  name="Użytkownik"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="34ac0af0-3986-47da-b29f-03eab2714d16"
+                  name="Tworzenie zadań na dzień"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="022770bc-1bf4-4251-8e6e-a1ddc471f869"
+            isDerived="false"
+            sourceEndRoleName="Użytkownik"
+            targetEndRoleName="Tworzenie wpisów w notesie"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="d189709d-934f-441c-8ddf-b235cd2210ea"
+              LastKnownName="Tworzenie wpisów w notesie"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="92d8bc92-83a8-469a-9bf9-c7e65754d0df"
+                  name="Użytkownik"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="7b457b72-69dd-4d88-a1b8-07785afce10b"
+                  name="Tworzenie wpisów w notesie"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="2ff466c2-4d58-4db3-9927-379df0db44c8"
+            isDerived="false"
+            sourceEndRoleName="Użytkownik"
+            targetEndRoleName="Tworzenie muzycznych przypomnień"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="bcdc83a0-cfc8-4536-a146-3e2b3d433fe3"
+              LastKnownName="Tworzenie muzycznych przypomnień"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="66387488-fb16-44e4-aaef-cb2b3d3faa60"
+                  name="Użytkownik"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="92496e25-3b1f-486b-8c11-26f5349b43e5"
+                  name="Tworzenie muzycznych przypomnień"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="97ef7eb7-b54f-4062-a450-d122acf1ab93"
+            isDerived="false"
+            sourceEndRoleName="Użytkownik"
+            targetEndRoleName="Ustawienia startu programu razem z Windows&#xD;&#xA;"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="15753593-3053-4475-aed4-1d66766c608c"
+              LastKnownName="Ustawienia startu programu razem z Windows&#xD;&#xA;"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="992eb102-cd56-4a2c-a03f-acf3dfb7c888"
+                  name="Użytkownik"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="4d398e1a-b5d9-4b47-a46b-72999351d595"
+                  name="Ustawienia startu programu razem z Windows&#xD;&#xA;"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="6f84edb8-fc4c-4dc3-a3fa-ce16b5e8896a"
+            isDerived="false"
+            sourceEndRoleName="Użytkownik"
+            targetEndRoleName="Ustawienie przypomnienia na stworzone zadania"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="3f4326c4-2f23-4cb5-a799-33450c96d86b"
+              LastKnownName="Ustawienie przypomnienia na stworzone zadania"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="7ad027d2-b71d-45db-8e53-9ca50e5ca2f3"
+                  name="Użytkownik"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="1a983a51-4f0d-4b00-b6aa-0025cfdfe0e6"
+                  name="Ustawienie przypomnienia na stworzone zadania"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="b11db076-cefa-4487-824f-506cec58a450"
+        name="Tworzenie zadań na dzień"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="d189709d-934f-441c-8ddf-b235cd2210ea"
+        name="Tworzenie wpisów w notesie"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="bcdc83a0-cfc8-4536-a146-3e2b3d433fe3"
+        name="Tworzenie muzycznych przypomnień"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="22470632-ed3f-4bb2-ba60-a9e49a669787"
+        name="UseCase3"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="15753593-3053-4475-aed4-1d66766c608c"
+        name="Ustawienia startu programu razem z Windows&#xD;&#xA;"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="3f4326c4-2f23-4cb5-a799-33450c96d86b"
+        name="Ustawienie przypomnienia na stworzone zadania"
+        isAbstract="false"
+        isLeaf="false">
+        <extendedCases>
+          <extend
+            Id="e3f76fe6-f9b7-4669-82c8-d562a53d8532">
+            <useCaseMoniker
+              Id="b11db076-cefa-4487-824f-506cec58a450"
+              LastKnownName="Tworzenie zadań na dzień"
+              LastKnownLocation="ModelingProject1.uml" />
+          </extend>
+        </extendedCases>
+      </useCase>
+    </packageHasNamedElement>
+  </packagedElements>
+  <primitiveType
+    Id="220a3521-e091-4221-bae9-3ef9018e845c"
+    name="Integer"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+    name="Boolean"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+    name="String"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="3ab42e7d-4969-445a-b209-471f5cb8209c"
+    name="UnlimitedNatural"
+    isAbstract="false"
+    isLeaf="false" />
+</modelStoreModel>
